@@ -29,7 +29,9 @@ This repository contains my lab implementations for the *"Introduction to Machin
 | # | Lab | Topic | Status |
 |---|-----|-------|--------|
 | 1 | Lab 1 | Data Preprocessing & Learning | ✅ Complete |
-| 2 | Lab 2 | Coming soon... | 🔄 In Progress |
+| 2 | Lab 2 | Gradient Descent Algorithm | ✅ Complete |
+| 3 | Lab 3 | Linear Algebra Review | ✅ Complete |
+| 4 | Lab 4 | Coming soon... | 🔄 In Progress |
 
 ---
 
@@ -46,6 +48,14 @@ MachineLearning1/
 │   ├── section2.py
 │   ├── section3.py
 │   └── section4.py
+├── GradientDecentAlgorithm/
+│   ├── __init__.py
+│   ├── gradientDescent.py
+│   └── visual.py
+├── LinearAlgebraReview/
+│   ├── __init__.py
+│   ├── matrixFunctions.py
+│   └── plotFunction.py
 ├── main.py
 └── README.md
 ```
@@ -67,61 +77,74 @@ The [IRIS dataset](https://www.kaggle.com/datasets/uciml/iris) contains **150 sa
 | PetalWidthCm | Width of the petal (cm) | Numerical |
 | Species | Iris-setosa / Iris-versicolor / Iris-virginica | Categorical |
 
----
+#### ⚙️ What I Implemented
 
-### ⚙️ What I Implemented
-
-#### 📂 Section 1 - Read & Write
+##### 📂 Section 1 - Read & Write
 - `read_file()` — reads the IRIS dataset from a CSV file
 - `write_data_to_file()` — saves processed data back to a CSV file
 
-#### 📂 Section 2 - Dataset Analysis
+##### 📂 Section 2 - Dataset Analysis
 - `mean()` — calculates the average of a selected column
 - `std_dev()` — measures the spread of data
 - `variance()` — measures the variability of data
 - `min_max()` — finds the smallest and largest values in a column
 
-#### 📂 Section 3 - Data Preprocessing
+##### 📂 Section 3 - Data Preprocessing
 - `replace_null_values()` — fills missing values with the column mean
 - `encoding()` — converts categorical Species column to numerical values
 - `min_max_scaling()` — scales column values to range [0, 1]
 - `normalize()` — applies Z-score standardization (mean=0, std=1)
 
-#### 📂 Section 4 - Visualization
+##### 📂 Section 4 - Visualization
 - Histogram — distribution before/after normalization
 - Pie chart — equal distribution of Iris species
 - Bar chart — compare discrete values
 
 ---
 
-### 💻 Example Usage
-```python
-from section1 import read_file, write_data_to_file
-from section2 import mean, std_dev, variance, min_max
-from section3 import replace_null_values, encoding, min_max_scaling, normalize
-from section4 import plot
+## 🧪 Lab 2 - Gradient Descent Algorithm
 
-# Load data
-data = read_file("Iris.csv")
+Gradient Descent is an optimization algorithm used to minimize a cost function by iteratively moving in the direction of steepest descent.
 
-# Replace missing values
-data = replace_null_values(data, 1, mean(data, 1))
+#### ⚙️ What I Implemented
 
-# Analyze
-print(mean(data, 1))
-print(std_dev(data, 1))
-print(variance(data, 1))
-print(min_max(data, 1))
+- `cost_function()` — defines the cost function **x² + 4x + 2**
+- `gradient_function()` — first derivative of the cost function **2x + 4**
+- `gradient_descent()` — runs the algorithm with configurable learning rate and iterations
+- Visualization of cost reduction at different learning rates
 
-# Preprocess
-data = encoding(data, 5)
-data = min_max_scaling(data, 1)
-data = normalize(data, 1)
+#### 💡 Key Concepts
 
-# Visualize
-values = [row[1] for row in data]
-plot([], values, type='hist')
-```
+| Concept | Description |
+|---------|-------------|
+| Learning Rate (α) | Controls the step size — too large overshoots, too small is slow |
+| Starting Point | x = 3 |
+| True Minimum | x = -2, cost = -2 |
+| Cost Function | Must be differentiable and convex (f''(x) ≥ 0) |
+
+---
+
+## 🧪 Lab 3 - Linear Algebra Review
+
+A complete implementation of matrix operations from scratch — no external libraries.
+
+#### ⚙️ What I Implemented
+
+- `size()` — returns number of rows and columns
+- `generate()` — creates a matrix filled with a default value
+- `scalar_mul()` — multiplies every element by a scalar
+- `scalar_add()` — adds a scalar to every element
+- `mul()` — matrix multiplication
+- `concat()` — joins two matrices side by side
+- `add()` / `sub()` — element-wise addition and subtraction
+- `sum_el()` / `prod_el()` — sum and product of all elements
+- `trans()` — matrix transpose
+- `identity()` — generates the identity matrix
+- `minor()` — removes a row and column from a matrix
+- `cofactor()` — calculates the cofactor of an element
+- `determinant()` — recursive determinant calculation
+- `inverse()` — matrix inverse using adjugate method
+- `least_squares()` — fits a line y=mx+b to data points and plots the result
 
 ---
 
