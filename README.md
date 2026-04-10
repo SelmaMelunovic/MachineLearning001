@@ -31,7 +31,8 @@ This repository contains my lab implementations for the *"Introduction to Machin
 | 1 | Lab 1 | Data Preprocessing & Learning | ✅ Complete |
 | 2 | Lab 2 | Gradient Descent Algorithm | ✅ Complete |
 | 3 | Lab 3 | Linear Algebra Review | ✅ Complete |
-| 4 | Lab 4 | Coming soon... | 🔄 In Progress |
+| 4 | Lab 4 | Linear and Multiple Regression | ✅ Complete |
+| 5 | Lab 5 | Coming soon... | 🔄 In Progress |
 
 ---
 
@@ -41,7 +42,7 @@ MachineLearning1/
 │
 ├── .venv/
 ├── DataPreprocessing&Learning/
-│   ├── __init__.py
+│   ├── init.py
 │   ├── Iris.csv
 │   ├── output.csv
 │   ├── section1.py
@@ -49,17 +50,22 @@ MachineLearning1/
 │   ├── section3.py
 │   └── section4.py
 ├── GradientDecentAlgorithm/
-│   ├── __init__.py
+│   ├── init.py
 │   ├── gradientDescent.py
 │   └── visual.py
 ├── LinearAlgebraReview/
-│   ├── __init__.py
+│   ├── init.py
 │   ├── matrixFunctions.py
 │   └── plotFunction.py
+├── LinearAndMultipleRegression/
+│   ├── init.py
+│   ├── housing_data_5features.csv
+│   ├── linearRegression.py
+│   ├── multipleLinearRegression.py
+│   └── vectorizedRegression.py
 ├── main.py
 └── README.md
 ```
-
 ---
 
 ## 🧪 Lab 1 - Data Preprocessing & Learning
@@ -145,6 +151,61 @@ A complete implementation of matrix operations from scratch — no external libr
 - `determinant()` — recursive determinant calculation
 - `inverse()` — matrix inverse using adjugate method
 - `least_squares()` — fits a line y=mx+b to data points and plots the result
+
+---
+
+## 🧪 Lab 4 - Linear and Multiple Regression
+
+A complete implementation of linear regression from scratch — no external ML libraries. The goal is to understand how models learn by implementing the hypothesis function, cost function, and gradient descent manually.
+
+### 📋 Dataset
+
+The housing dataset contains **50 samples** of residential properties with **5 input features** and a target price.
+
+| Column | Description | Type |
+|--------|-------------|------|
+| Size_sqm | Size of the house in square metres | Numerical |
+| Bedrooms | Number of bedrooms | Numerical |
+| Bathrooms | Number of bathrooms | Numerical |
+| Age | Age of the house in years | Numerical |
+| Distance | Distance to city centre (km) | Numerical |
+| Price | Sale price in EUR (target) | Numerical |
+
+#### ⚙️ What I Implemented
+
+##### 📂 linearRegression.py — Simple Linear Regression
+Predicts house price from a single feature (size).
+
+- `linear_reg_cost()` — computes the Mean Squared Error (MSE) cost function
+- `linear_reg_delta_cost()` — computes partial derivatives (gradients) w.r.t. w0 and w1
+- `train_linear_reg()` — trains the model using Gradient Descent
+
+##### 📂 multipleLinearRegression.py — Multiple Linear Regression
+Extends the model to use all 5 features simultaneously.
+
+- `predict_row()` — computes prediction for a single data point
+- `multi_linear_reg_cost()` — MSE cost across all features
+- `multi_linear_reg_delta_cost()` — gradients for all weights
+- `train_multi_linear_reg()` — trains the model using Gradient Descent
+
+##### 📂 vectorizedRegression.py — Vectorized Linear Regression
+Reimplements the above using matrix algebra instead of explicit loops.
+
+- `mat_vec_mul()` — matrix × vector multiplication (computes all predictions at once)
+- `mat_T_vec_mul()` — transposed matrix × vector (computes all gradients at once)
+- `linear_reg_cost_vec()` — vectorized MSE cost
+- `linear_reg_delta_cost_vec()` — vectorized gradient
+- `train_linear_reg_vec()` — vectorized training loop
+
+#### 💡 Key Concepts
+
+| Concept | Description |
+|---------|-------------|
+| Hypothesis | ŷ = w0 + w1·x1 + w2·x2 + ... + wn·xn |
+| Cost Function | MSE = (1/2m) Σ (ŷ - y)² |
+| Gradient Descent | w := w - α · ∂J/∂w |
+| Learning Rate (α) | Too large → diverges, too small → slow convergence |
+| Vectorization | Express all operations as matrix algebra for efficiency |
 
 ---
 
